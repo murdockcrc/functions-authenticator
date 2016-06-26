@@ -7,7 +7,7 @@ describe('Register new device', function(){
 
     var deviceId = "cbpi-xxxx";
     var req = {
-        params: {
+        query: {
             deviceId: deviceId
         }
     }
