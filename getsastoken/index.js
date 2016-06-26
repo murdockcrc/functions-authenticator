@@ -60,10 +60,13 @@ module.exports = function(context, req) {
 
         var sasToken = generateSasToken(resourceUri, token, null, 14400);
 
-        context.bindings.res({
+        // context.bindings.res({
+        //     status: 200,
+        //     body: sasToken
+        // });
+    }
+    context.done(null, {
             status: 200,
             body: sasToken
         });
-    }
-    context.done();
 }
