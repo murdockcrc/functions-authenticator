@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var util = require('util');
 
-var sbNamespace = process.env.SBNAMESPACE || 'cbpi-prod.azure-devices.net';
+var sbNamespace = process.env.SBNAMESPACE || 'xxx.azure-devices.net';
 
 var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMins) {
     resourceUri = encodeURIComponent(resourceUri.toLowerCase()).toLowerCase();
@@ -26,7 +26,7 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
     return token;
 };
 
-module.exports.getSASToken = function getSASToken(context, req) { 
+module.exports = function getSASToken(context, req) { 
     var token = req.query.token;
     var deviceId = req.query.deviceId;
     var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
