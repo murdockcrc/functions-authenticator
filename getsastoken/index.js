@@ -45,28 +45,43 @@ function validateInput(token, deviceId) {
 }
 
 module.exports = function(context, req) { 
-    // for (var property in context.bindings) {
-    //     context.log("Key: %s, Value: %s", property, context.bindings[property]);
-    // }
-
     var token = req.query.token;
     var deviceId = req.query.deviceId;
 
-    var isInputValid = validateInput(token, deviceId);
-    if(isInputValid) {
-        context.res(isInputValid);
-    } else {
-        var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
+    var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
 
-        var sasToken = generateSasToken(resourceUri, token, null, 14400);
+    var sasToken = generateSasToken(resourceUri, token, null, 14400);
 
-        // context.bindings.res({
-        //     status: 200,
-        //     body: sasToken
-        // });
-    }
-    context.done(null, {
-            status: 200,
-            body: sasToken
-        });
+    // context.res({
+    //     status: 200,
+    //     body: sasToken
+    // });
+    
+    context.done(null, {res: {
+        status: 200,
+        body: sasToken
+    }});
 }
+
+// module.exports = function(context, req) { 
+//     var token = req.query.token;
+//     var deviceId = req.query.deviceId;
+
+//     var isInputValid = validateInput(token, deviceId);
+//     if(isInputValid) {
+//         context.res(isInputValid);
+//     } else {
+//         var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
+
+//         var sasToken = generateSasToken(resourceUri, token, null, 14400);
+
+//         // context.bindings.res({
+//         //     status: 200,
+//         //     body: sasToken
+//         // });
+//     }
+//     context.done(null, {
+//             status: 200,
+//             body: sasToken
+//         });
+// }
