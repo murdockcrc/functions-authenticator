@@ -1,0 +1,17 @@
+{
+  "name": "register-new-device",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azure-iothub": "^1.0.10",
+    "request": "^2.72.0",
+    "should": "^9.0.2",
+    "util": "^0.10.3"
+  }
+}
