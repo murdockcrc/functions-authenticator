@@ -26,6 +26,21 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
     return token;
 };
 
+// function validateInput(token, deviceId) {
+//     var errorMessage = null;
+//     if(!token) {
+//         errorMessage = "Error: missing token";
+//     } else if(!deviceId) {
+//         errorMessage = "Error: missing device ID"
+//     }
+//     if(errorMessage) {
+//         return {
+//             status: 400,
+//             body: errorMessage
+//         }
+//     }
+// }
+
 module.exports = function(context, req) { 
     var token = req.query.token;
     var deviceId = req.query.deviceId;
