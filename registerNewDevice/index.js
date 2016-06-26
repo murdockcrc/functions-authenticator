@@ -17,6 +17,7 @@ function provisionDevice(deviceId, callback) {
 }
 
 module.exports = function (context, req) {
+    context.log(req);
     var deviceId = req.params.deviceId;
 
     provisionDevice(deviceId, function(error, deviceInfo) {
