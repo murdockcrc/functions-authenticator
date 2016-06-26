@@ -51,11 +51,6 @@ module.exports = function(context, req) {
     var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
 
     var sasToken = generateSasToken(resourceUri, token, null, 14400);
-
-    // context.res({
-    //     status: 200,
-    //     body: sasToken
-    // });
     
     context.done(null, {
         res: {

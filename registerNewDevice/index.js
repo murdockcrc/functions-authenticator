@@ -21,23 +21,16 @@ module.exports = function (context, req) {
 
     provisionDevice(deviceId, function(error, deviceInfo) {
         if (error) {
-            context.res({
+            context.res = {
                 status: 500,
                 body: error
-            });
+            };
         } else {
-            context.res({
+            context.res = {
                 status: 201,
                 body: deviceInfo
-            });
+            };
         }
         context.done();
     });
 }
-
-// module.exports.getConfiguration = function getConfiguration(req, res) {
-//     var response = {
-//         iotHubName: iotHubName
-//     }
-//     res.json(response);
-// }
