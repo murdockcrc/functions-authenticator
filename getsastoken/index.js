@@ -52,12 +52,17 @@ module.exports = function(context, req) {
 
     var sasToken = generateSasToken(resourceUri, token, null, 14400);
 
-    context.res({
-        status: 200,
-        body: sasToken
-    });
+    // context.res({
+    //     status: 200,
+    //     body: sasToken
+    // });
     
-    context.done();
+    context.done(null, {
+        res: {
+            status: 200,
+            body: sasToken
+        }
+    });
 }
 
 // module.exports = function(context, req) { 
