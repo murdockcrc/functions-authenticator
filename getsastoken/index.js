@@ -34,5 +34,5 @@ module.exports = function getSASToken(context, req) {
     var sasToken = generateSasToken(resourceUri, token, null, 14400);
 
     context.log(sasToken);
-    context.send(sasToken);    
+    context.res(sasToken);    
 }
