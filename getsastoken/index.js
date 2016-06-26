@@ -45,9 +45,9 @@ function validateInput(token, deviceId) {
 }
 
 module.exports = function(context, req) { 
-    // for (var property in context) {
-    //     context.log("Key: %s, Value: %s", property, context[property]);
-    // }
+    for (var property in context.bindings) {
+        context.log("Key: %s, Value: %s", property, context.bindings[property]);
+    }
 
     var token = req.query.token;
     var deviceId = req.query.deviceId;
