@@ -27,6 +27,10 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
 };
 
 module.exports = function(context, req) { 
+    for (var property in context) {
+        context.log("Key: %s, Value: %s", property, context[property]);
+    }
+
     var token = req.query.token;
     var deviceId = req.query.deviceId;
     var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
@@ -34,10 +38,10 @@ module.exports = function(context, req) {
     var sasToken = generateSasToken(resourceUri, token, null, 14400);
 
     context.log(sasToken);
-    context.log(typeof(context.res));
-    context.res({
-        status: 200,
-        body: sasToken
-    });
+    // context.log(typeof(context.res));
+    // context.res({
+    //     status: 200,
+    //     body: sasToken
+    // });
     context.done();
 }
