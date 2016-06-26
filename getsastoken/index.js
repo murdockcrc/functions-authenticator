@@ -26,7 +26,7 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
     return token;
 };
 
-module.exports = function getSASToken(context, req) { 
+module.exports = function(context, req) { 
     var token = req.query.token;
     var deviceId = req.query.deviceId;
     var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
