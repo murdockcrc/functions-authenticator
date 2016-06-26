@@ -24,7 +24,7 @@ module.exports = function (context, req) {
             context.res({
                 status: 500,
                 body: error
-            })
+            });
         } else {
             context.res({
                 status: 201,
@@ -32,7 +32,7 @@ module.exports = function (context, req) {
             });
         }
         context.done();
-    })
+    });
 }
 
 // module.exports.getConfiguration = function getConfiguration(req, res) {
