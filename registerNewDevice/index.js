@@ -23,7 +23,7 @@ module.exports = function (context, req) {
         if (error) {
             context.res = {
                 status: 500,
-                body: error
+                body: "An error was received from the backend when trying to register the device"
             };
         } else {
             context.res = {
