@@ -1,0 +1,45 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "CBPI API",
+        "description": "Swagger API definitoin",
+        "version": "1.0.0"
+    },
+    "host": "cbpi-apri-prod.azuwebsites.net",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/api",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/getSASToken": {
+            "get": {
+                "summary": "Shared Access Signature token",
+                "description": "This endpoint returns a SAS token for the Azure IoT Hub connection. The return SAS token is valid only for the device ID provided in this GET request.\n",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "in": "query",
+                        "description": "deviceId of the device requesting the SAS Token.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Symmatric key for the device ID that is requesting the SAS token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A SAS token"
+                    }
+                }
+            }
+        }
+    }
+}
