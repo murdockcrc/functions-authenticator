@@ -46,7 +46,3 @@ function authenticate(context, req) {
 }
 
 module.exports = authenticate;
-
-// user pass Xubo0037
-// aad app key: 
-// aad client id: 
