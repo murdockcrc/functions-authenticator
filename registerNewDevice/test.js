@@ -13,10 +13,11 @@ function getResponseObject() {
 }
 
 describe('Register new device', function(){
+    var token = process.env.IoT_HUB_TOKEN;
+
   it('Register new device', function(done){
     this.timeout(10000);
 
-    var token = "p0n4xq5lKDdxITzeuW20e+AEKRIkZe9VoITbnvMw0DY=";
     var uniqueId = uuid.v1();
     var deviceId = "test-" + uniqueId;
     var req = {
@@ -38,7 +39,6 @@ describe('Register new device', function(){
     this.timeout(10000);
 
     var deviceId = "test-0e9ef240-3c65-11e6-9ec3-5d20955f7e1f";
-    var token = "p0n4xq5lKDdxITzeuW20e+AEKRIkZe9VoITbnvMw0DY=";
 
     var req = {
         body: {
@@ -59,12 +59,12 @@ describe('Register new device', function(){
     this.timeout(10000);
 
     var deviceId = "cbpi-xxx";
-    var token = "token";
+    var fakeToken = "token";
 
     var req = {
         body: {
             deviceId: deviceId,
-            token: token
+            token: fakeToken
         }
     }
     var context = getResponseObject();

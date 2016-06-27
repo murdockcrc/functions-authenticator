@@ -16,7 +16,7 @@ describe('getSASToken', function(){
     this.timeout(5000);
 
     var deviceId = "cbpi-xxx",
-        token = "CFioZg5ajh6+qX1p1tZx4J4PsRKc5WdaCogVjSmSkVI=",
+        token = "token",
         req = {
             query: {
                 deviceId: deviceId,
@@ -37,7 +37,7 @@ describe('getSASToken', function(){
     this.timeout(5000);
 
     var deviceId = "cbpi-xxx",
-        token = "CFioZg5ajh6+qX1p1tZx4J4PsRKc5WdaCogVjSmSkVI=",
+        token = "token",
         req = {
             query: {
                 token: token
@@ -57,7 +57,7 @@ describe('getSASToken', function(){
     this.timeout(5000);
 
     var deviceId = "cbpi-xxx",
-        token = "CFioZg5ajh6+qX1p1tZx4J4PsRKc5WdaCogVjSmSkVI=",
+        token = "token",
         req = {
             query: {
                 deviceId: deviceId,
@@ -77,7 +77,7 @@ describe('getSASToken', function(){
     this.timeout(5000);
 
     var deviceId = "cbpi-xxx",
-        token = "CFioZg5ajh6+qX1p1tZx4J4PsRKc5WdaCogVjSmSkVI=",
+        token = "token",
         req = {
     }
 
