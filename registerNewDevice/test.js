@@ -14,9 +14,9 @@ function getResponseObject() {
 
 describe('Register new device', function(){
   it('Register new device', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
-    var token = "CaIZWxaQdRBT09euPaaQBbbToEWfuv1Jj38QRxE3RYo=";
+    var token = "p0n4xq5lKDdxITzeuW20e+AEKRIkZe9VoITbnvMw0DY=";
     var uniqueId = uuid.v1();
     var deviceId = "test-" + uniqueId;
     var req = {
@@ -35,10 +35,10 @@ describe('Register new device', function(){
   });
 
   it('Register conflicted device', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
-    var deviceId = "cbpi-xxx";
-    var token = "token";
+    var deviceId = "test-0e9ef240-3c65-11e6-9ec3-5d20955f7e1f";
+    var token = "p0n4xq5lKDdxITzeuW20e+AEKRIkZe9VoITbnvMw0DY=";
 
     var req = {
         body: {
@@ -56,7 +56,7 @@ describe('Register new device', function(){
   });
 
   it('Register device with wrong authentication token', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
     var deviceId = "cbpi-xxx";
     var token = "token";
@@ -77,7 +77,7 @@ describe('Register new device', function(){
   });
 
   it('Submits empty body', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
     var req = {};
     var context = getResponseObject();
@@ -91,7 +91,7 @@ describe('Register new device', function(){
   });
 
   it('Submits body without deviceId', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
     var req = {
         body: {
@@ -109,7 +109,7 @@ describe('Register new device', function(){
   });
 
   it('Submits body without token', function(done){
-    this.timeout(5000);
+    this.timeout(10000);
 
     var req = {
         body: {

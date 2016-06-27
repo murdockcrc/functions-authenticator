@@ -4,7 +4,7 @@ var iothub = require('azure-iothub');
 var util = require('util');
 var request = require('request');
 
-var iotHubName = process.env.IOT_HUB_NAME || 'cbpi-prod.azure-devices.net';
+var iotHubName = process.env.IOT_HUB_NAME || 'cbpi-lab.azure-devices.net';
 var iotHubConnectionString;
 
 function provisionDevice(deviceId, callback) { 
@@ -45,7 +45,7 @@ module.exports = function (context, req) {
     } else {
         var deviceId = req.body.deviceId,
             token = req.body.token;
-        iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-prod.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=%s', token);
+        iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-lab.azure-devices.net;SharedAccessKeyName=registryReadWrite;SharedAccessKey=%s', token);
 
         provisionDevice(deviceId, function(error, deviceInfo) {
             if (error) {
