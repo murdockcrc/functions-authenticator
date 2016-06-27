@@ -59,26 +59,3 @@ module.exports = function(context, req) {
         }
     });
 }
-
-// module.exports = function(context, req) { 
-//     var token = req.query.token;
-//     var deviceId = req.query.deviceId;
-
-//     var isInputValid = validateInput(token, deviceId);
-//     if(isInputValid) {
-//         context.res(isInputValid);
-//     } else {
-//         var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
-
-//         var sasToken = generateSasToken(resourceUri, token, null, 14400);
-
-//         // context.bindings.res({
-//         //     status: 200,
-//         //     body: sasToken
-//         // });
-//     }
-//     context.done(null, {
-//             status: 200,
-//             body: sasToken
-//         });
-// }
