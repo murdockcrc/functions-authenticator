@@ -12,17 +12,27 @@ function getResponseObject() {
 }
 
 describe('getJsonWebToken', function(){
-  it('AAD Server to Server Authentication', function(done){
-    this.timeout(5000);
+    var username = "user1@coditlab.onmicrosoft.com",
+        password = process.env.AAD_USER_PASSWORD;
 
-    var context = getResponseObject();
-    context.done = function() {
-        var response = this.res.body;
-        response.should.not.be.empty;
-        response.should.have.property('tokenType');
-        done();
-    }
+    it('AAD Server to Server Authentication', function(done){
+        this.timeout(5000);
 
-    func(context);
-  });
+        var req = {
+            body: {
+                username: username,
+                password: password
+            }
+        }
+        var context = getResponseObject();
+        context.done = function() {
+            var response = this.res.body;
+            response.should.not.be.empty;
+            response.should.have.property('tokenType');
+            response.userId.should.equal(username);
+            done();
+        }
+
+        func(context, req);
+    });
 });
