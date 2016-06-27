@@ -75,4 +75,54 @@ describe('Register new device', function(){
 
     func(context, req);
   });
+
+  it('Submits empty body', function(done){
+    this.timeout(5000);
+
+    var req = {};
+    var context = getResponseObject();
+    context.done = function() {
+        this.res.status.should.equal(400);
+        this.res.body.should.equal("NoBodyProvided");
+        done();
+    }
+
+    func(context, req);
+  });
+
+  it('Submits body without deviceId', function(done){
+    this.timeout(5000);
+
+    var req = {
+        body: {
+            token: "token"
+        }
+    }
+    var context = getResponseObject();
+    context.done = function() {
+        this.res.status.should.equal(400);
+        this.res.body.should.equal("MissingDeviceId");
+        done();
+    }
+
+    func(context, req);
+  });
+
+  it('Submits body without token', function(done){
+    this.timeout(5000);
+
+    var req = {
+        body: {
+            deviceId: "deviceId"
+        }
+    }
+    var context = getResponseObject();
+    context.done = function() {
+        this.res.status.should.equal(400);
+        this.res.body.should.equal("MissingAuthenticationToken");
+        done();
+    }
+
+    func(context, req);
+  });
 });
