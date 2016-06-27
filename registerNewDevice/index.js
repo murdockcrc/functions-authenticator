@@ -5,7 +5,6 @@ var util = require('util');
 var request = require('request');
 
 var iotHubName = process.env.IOT_HUB_NAME || 'cbpi-prod.azure-devices.net';
-var iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-prod.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=CaIZWxaQdRBT09euPaaQBbbToEWfuv1Jj38QRxE3RYo=');
 
 function provisionDevice(deviceId, callback) { 
     var registry = iothub.Registry.fromConnectionString(iotHubConnectionString);
@@ -17,7 +16,25 @@ function provisionDevice(deviceId, callback) {
 }
 
 module.exports = function (context, req) {
-    var deviceId = req.query.deviceId;
+    var deviceId = req.body.deviceId,
+        token = req.body.token;
+
+    if(!token) {
+        context.res = {
+            status: 400,
+            body: "AuthenticationTokenMissing"
+        }
+        context.done();
+        return;
+    } else if(!deviceId) {
+        context.res = {
+            status: 400,
+            body: "DeviceIdMissing"
+        }
+        context.done();
+        return;
+    }
+    var iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-prod.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=%s', token);
 
     provisionDevice(deviceId, function(error, deviceInfo) {
         if (error) {
