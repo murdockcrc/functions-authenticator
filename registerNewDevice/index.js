@@ -44,7 +44,7 @@ module.exports = function (context, req) {
         context.done();
     } else {
         var deviceId = req.body.deviceId,
-            token = req.body.token;
+            token = req.body.token;        
         iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-lab.azure-devices.net;SharedAccessKeyName=registryReadWrite;SharedAccessKey=%s', token);
 
         provisionDevice(deviceId, function(error, deviceInfo) {
