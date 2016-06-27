@@ -1,0 +1,19 @@
+{
+  "name": "get-json-web-token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adal-node": "^0.1.21",
+    "crypto": "0.0.3",
+    "jsonwebtoken": "^7.0.1"
+  },
+  "devDependencies": {
+    "should": "^9.0.2"
+  }
+}
