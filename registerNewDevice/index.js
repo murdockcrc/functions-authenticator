@@ -16,14 +16,19 @@ function provisionDevice(deviceId, callback) {
     registry.create(device, callback);
 }
 
-function validateInput(deviceId, token) {
+function validateInput(body) {
     var result = null;
-    if(!deviceId) {
+    if(!body) {
+        result = {
+            status: 400,
+            body: "NoBodyProvided"
+        };
+    } else if(!body.deviceId) {
         result = {
             status: 400,
             body: "MissingDeviceId"
         };
-    } else if(!token) {
+    } else if(!body.token) {
         result = {
             status: 400,
             body: "MissingAuthenticationToken"
@@ -33,14 +38,13 @@ function validateInput(deviceId, token) {
 }
 
 module.exports = function (context, req) {
-    var deviceId = req.body.deviceId,
-        token = req.body.token;
-
-    var isInputValid = validateInput(deviceId, token);
+    var isInputValid = validateInput(req.body);
     if(isInputValid) {
         context.res = isInputValid;
         context.done();
     } else {
+        var deviceId = req.body.deviceId,
+            token = req.body.token;
         iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('HostName=cbpi-prod.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=%s', token);
 
         provisionDevice(deviceId, function(error, deviceInfo) {
