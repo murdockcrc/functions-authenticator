@@ -26,36 +26,42 @@ var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMi
     return token;
 };
 
-function validateInput(token, deviceId) {
-    var errorMessage = null;
-    if(!token) {
-        errorMessage = "Error: missing token";
-    } else if(!deviceId) {
-        errorMessage = "Error: missing device ID"
-    }
-    if(errorMessage) {
-        return {
+function validateInput(body) {
+    var result = null;
+    if(!body) {
+        result = {
             status: 400,
-            body: errorMessage
+            body: "NoBodyProvided"
+        };
+    } else if(!body.deviceId) {
+        result = {
+            status: 400,
+            body: "MissingDeviceId"
+        };
+    } else if(!body.token) {
+        result = {
+            status: 400,
+            body: "MissingAuthenticationToken"
         }
     }
-    else {
-        return null;
-    }
+    return result;
 }
 
 module.exports = function(context, req) { 
-    var token = req.query.token;
-    var deviceId = req.query.deviceId;
+    var isInputValid = validateInput(req.query);    
+    if(isInputValid) {
+        context.res = isInputValid;
+        context.done();
+    } else {
+        var token = req.query.token;
+        var deviceId = req.query.deviceId;
+        var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
 
-    var resourceUri = util.format('%s/devices/%s', sbNamespace, deviceId);
-
-    var sasToken = generateSasToken(resourceUri, token, null, 14400);
-    
-    context.done(null, {
-        res: {
+        var sasToken = generateSasToken(resourceUri, token, null, 14400);
+        context.res = {
             status: 200,
             body: sasToken
         }
-    });
+        context.done();
+    }
 }
