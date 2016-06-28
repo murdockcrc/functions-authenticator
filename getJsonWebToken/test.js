@@ -15,7 +15,43 @@ describe('getJsonWebToken', function(){
     var username = "user1@coditlab.onmicrosoft.com",
         password = process.env.AAD_USER_PASSWORD;
 
-    it('AAD Server to Server Authentication', function(done){
+    it('AAD user authentication - wrong password', function(done){
+        this.timeout(5000);
+
+        var req = {
+            body: {
+                username: username,
+                password: 'password'
+            }
+        }
+        var context = getResponseObject();
+        context.done = function() {
+            this.res.status.should.equal('400');            
+            done();
+        }
+
+        func(context, req);
+    });
+
+    it('AAD user authentication - invalid username', function(done){
+        this.timeout(5000);
+
+        var req = {
+            body: {
+                username: 'user_does_not_exist@coditlab.onmicrosoft.com',
+                password: password
+            }
+        }
+        var context = getResponseObject();
+        context.done = function() {
+            this.res.status.should.equal('400');            
+            done();
+        }
+
+        func(context, req);
+    });
+
+    it('AAD user authentication', function(done){
         this.timeout(5000);
 
         var req = {
