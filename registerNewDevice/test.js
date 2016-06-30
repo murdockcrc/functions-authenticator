@@ -1,4 +1,5 @@
 var func = require('./index.js'),
+    util = require('util');
     should = require('should'),
     uuid = require('uuid');
 
@@ -15,7 +16,7 @@ function getResponseObject() {
 describe('Register new device', function(){
     var token = process.env.IoT_HUB_TOKEN;
 
-  it('Register new device', function(done){
+  it.only('Register new device', function(done){
     this.timeout(10000);
 
     var uniqueId = uuid.v1();
@@ -28,6 +29,7 @@ describe('Register new device', function(){
     }
     var context = getResponseObject();
     context.done = function() {
+        console.log(util.format("%j", this.res.body));
         context.res.status.should.equal(201);
         done();
     };
