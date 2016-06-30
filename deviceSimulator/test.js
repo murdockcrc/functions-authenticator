@@ -27,7 +27,7 @@ describe('deviceSimulator', function(){
         context.done = function() {
             should.not.exist(this.res);
             done();
-        }     
+        }
         dataSimulator(context);        
     });
 });
