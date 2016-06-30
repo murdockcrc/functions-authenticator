@@ -12,6 +12,7 @@ var deviceKey = 'J6fRthDeEt3PnbfFzeihyINCY5eIVjUpSluUoV0tnF0=';
 var data = {
     "timestamp": new Date().toUTCString(),
     "groupname":"Measurement",    
+    "buildingId": 'VD-001',
     "value_voltage_v":224,
     "value_curent_a":0.3,
     "value_power_w":40,
@@ -75,7 +76,6 @@ var client = Client.fromConnectionString(connectionString, Protocol);
 function main(context, req) {
     var deviceData = dataManipulator();
     var message = new Message(JSON.stringify(deviceData));
-    message.properties.buildingId = 'VD-001';
     message.userId = deviceId;
 
     client.open(function (error, result) {
