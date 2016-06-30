@@ -86,7 +86,6 @@ function main(context, req) {
             client.sendEvent(message, function(error, result) {
                 if(error) {
                     context.log(error);
-                    context.res = 'error';
                 }
                 context.done();
             });
