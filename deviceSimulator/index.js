@@ -12,6 +12,7 @@ var deviceKey = 'J6fRthDeEt3PnbfFzeihyINCY5eIVjUpSluUoV0tnF0=';
 var data = {
     "timestamp": new Date().toUTCString(),
     "groupname":"Measurement",
+    "deviceId": deviceId,
     "value_voltage_v":224,
     "value_curent_a":0.3,
     "value_power_w":40,
