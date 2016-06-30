@@ -37,6 +37,7 @@ function dataManipulator() {
     newData.value_voltage_v = Math.floor(newData.value_voltage_v + (newData.value_voltage_v * valueManipulators.voltage));
     newData.value_curent_a = newData.value_curent_a + (newData.value_curent_a * valueManipulators.current);
     newData.value_energytotal_wh = Math.floor(newData.value_energytotal_wh + (newData.value_energytotal_wh * valueManipulators.energy));
+    newData.timestamp = new Date().toUTCString();
 
     return newData;
 }
