@@ -11,8 +11,7 @@ var deviceKey = 'J6fRthDeEt3PnbfFzeihyINCY5eIVjUpSluUoV0tnF0=';
 
 var data = {
     "timestamp": new Date().toUTCString(),
-    "groupname":"Measurement",
-    "deviceId": deviceId,
+    "groupname":"Measurement",    
     "value_voltage_v":224,
     "value_curent_a":0.3,
     "value_power_w":40,
@@ -75,12 +74,16 @@ var client = Client.fromConnectionString(connectionString, Protocol);
 
 function main(context, req) {
     var deviceData = dataManipulator();
+    var message = new Message(JSON.stringify(deviceData));
+    message.properties.buildingId = 'VD-001';
+    message.userId = deviceId;
+
     client.open(function (error, result) {
         if (error) {
             context.log(error);
         } else {
             context.log('Sending device metadata:\n' + JSON.stringify(deviceMetaData));
-            client.sendEvent(new Message(JSON.stringify(deviceData)), function(error, result) {
+            client.sendEvent(message), function(error, result) {
                 if(error) {
                     context.log(error);
                     context.res = 'error';
