@@ -1,16 +1,10 @@
 {
   "bindings": [
     {
-      "webHookType": "",
-      "name": "req",
-      "type": "httpTrigger",
-      "direction": "in",
-      "authLevel": "anonymous"
-    },
-    {
-      "name": "res",
-      "type": "http",
-      "direction": "out"
+      "schedule": "*/1 * * * * *",
+      "name": "myTimer",
+      "type": "timerTrigger",
+      "direction": "in"
     }
   ],
   "disabled": false
