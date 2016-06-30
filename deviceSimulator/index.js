@@ -83,7 +83,7 @@ function main(context, req) {
             context.log(error);
         } else {
             context.log('Sending device metadata:\n' + JSON.stringify(deviceMetaData));
-            client.sendEvent(message), function(error, result) {
+            client.sendEvent(message, function(error, result) {
                 if(error) {
                     context.log(error);
                     context.res = 'error';
