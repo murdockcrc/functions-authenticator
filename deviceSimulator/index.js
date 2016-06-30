@@ -72,12 +72,13 @@ var deviceId = ConnectionString.parse(connectionString).DeviceId;
 var client = Client.fromConnectionString(connectionString, Protocol);
 
 function main(context, req) {
+    var deviceData = dataManipulator();
     client.open(function (error, result) {
         if (error) {
             context.log(error);
         } else {
             context.log('Sending device metadata:\n' + JSON.stringify(deviceMetaData));
-            client.sendEvent(new Message(JSON.stringify(data)), function(error, result) {
+            client.sendEvent(new Message(JSON.stringify(deviceData)), function(error, result) {
                 if(error) {
                     context.log(error);
                     context.res = 'error';
