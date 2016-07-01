@@ -20,7 +20,7 @@ describe('Register new device', function(){
     this.timeout(10000);
 
     var uniqueId = uuid.v1();
-    var deviceId = "test-" + uniqueId;
+    var deviceId = "cbpi-" + uniqueId;
     var req = {
         body: {
             deviceId: deviceId,
