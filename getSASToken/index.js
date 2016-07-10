@@ -1,7 +1,8 @@
 var crypto = require('crypto');
 var util = require('util');
+var config = require('../config.js');
 
-var sbNamespace = process.env.SBNAMESPACE || 'cbpi-prod.azure-devices.net';
+var sbNamespace = process.env.SBNAMESPACE || config.IoTHub.name;
 
 var generateSasToken = function(resourceUri, signingKey, policyName, expiresInMins) {
     resourceUri = encodeURIComponent(resourceUri.toLowerCase()).toLowerCase();

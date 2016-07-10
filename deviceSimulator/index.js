@@ -5,9 +5,10 @@ var Protocol = require('azure-iot-device-http').Http;
 var Client = require('azure-iot-device').Client;
 var ConnectionString = require('azure-iot-device').ConnectionString;
 var Message = require('azure-iot-device').Message;
+var config = require('../config.js');
 
-var deviceId = 'test-0d544dd0-3eaa-11e6-8205-6d1f96ea4efc';
-var deviceKey = 'J6fRthDeEt3PnbfFzeihyINCY5eIVjUpSluUoV0tnF0=';
+var deviceId = 'cbpi-9ef24240-469f-11e6-96c2-d96e7ccf2181';
+var deviceKey = '8PLs4h1lbjQuJdQd9EcjSfNwX7f+UZ9JTh6JLTPQTE8=';
 
 var data = {
     "timestamp": new Date().toUTCString(),
@@ -67,7 +68,7 @@ var deviceMetaData = {
 
 // String containing Hostname, Device Id & Device Key in the following formats:
 //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
-var connectionString = util.format('HostName=cbpi-lab.azure-devices.net;DeviceId=%s;SharedAccessKey=%s', deviceId, deviceKey);
+var connectionString = util.format('HostName=%s;DeviceId=%s;SharedAccessKey=%s', config.IoTHub.name, deviceId, deviceKey);
 var deviceId = ConnectionString.parse(connectionString).DeviceId;
 
 // Create IoT Hub client
