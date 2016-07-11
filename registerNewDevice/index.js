@@ -49,6 +49,7 @@ module.exports = function (context, req) {
         iotHubConnectionString = process.env.IOTHUB_CONNECTION_STRING || util.format('%s%s', config.IoTHub.connectionString.registryReadWrite, token);
 
         provisionDevice(deviceId, function(error, deviceInfo) {
+            console.log(error);
             if (error) {
                 context.res = {
                     status: 500,

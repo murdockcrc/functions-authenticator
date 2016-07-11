@@ -7,8 +7,8 @@ var ConnectionString = require('azure-iot-device').ConnectionString;
 var Message = require('azure-iot-device').Message;
 var config = require('../config.js');
 
-var deviceId = 'cbpi-9ef24240-469f-11e6-96c2-d96e7ccf2181';
-var deviceKey = '8PLs4h1lbjQuJdQd9EcjSfNwX7f+UZ9JTh6JLTPQTE8=';
+var deviceId = 'cbpi-785b1db0-474d-11e6-8c6c-01e11fa91e59';
+var deviceKey = 'UFKfUrT+HJMWs28hBku54zsBYlCak9xI8hRCo5v46H4=';
 
 var data = {
     "timestamp": new Date().toUTCString(),
@@ -83,12 +83,13 @@ function main(context, req) {
         if (error) {
             context.log(error);
         } else {            
-            client.sendEvent(message, function(error, result) {
+            client.sendEvent(message, function(error, result) {                    
                 if(error) {
                     context.log(error);
-                }
-                context.done();
-            });
+                    return;
+                }                                       
+            });            
+            context.done();
         }
     });
 }
