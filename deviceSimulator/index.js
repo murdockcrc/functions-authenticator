@@ -19,6 +19,23 @@ var data = {
     "value_power_w":40,
     "value_energytotal_wh":63450
 }
+var temperatureData = {
+    "GroupName":"Temperature",
+    "Timestamp":new Date().toUTCString(),
+    "Temp_Value":26.51
+}
+
+var potiData = {
+    "GroupName":"ArrayPoti",
+    "Timestamp":new Date().toUTCString(),
+    "Poti_Value":[20581,3984]
+}
+
+var toiletData = {
+    "GroupName":"Presence",
+    "Timestamp":new Date().toUTCString(),
+    "Input": false
+}
 
 function randomSign() {
     var random = Math.random();
@@ -79,17 +96,29 @@ function main(context, req) {
     var message = new Message(JSON.stringify(deviceData));
     message.userId = deviceId;
 
+    temperatureData.Temp_Value = temperatureData.Temp_Value + (randomSign() * 0.1 * temperatureData.Temp_Value);
+    toiletData.Input = randomSign() == -1 ? false : true;
+
+    var batchData = [
+        message,
+        new Message(JSON.stringify(temperatureData)),
+        new Message(JSON.stringify(potiData)),
+        new Message(JSON.stringify(toiletData))
+    ];
+
+    console.log(batchData);
+
     client.open(function (error, result) {
         if (error) {
             context.log(error);
         } else {            
-            client.sendEvent(message, function(error, result) {                    
+            client.sendEventBatch(batchData, function(error, result) {                    
                 if(error) {
                     context.log(error);
                     return;
-                }                                       
-            });            
-            context.done();
+                }
+                context.done();                                       
+            });                             
         }
     });
 }
