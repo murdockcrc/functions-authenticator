@@ -16,7 +16,7 @@ var data = {
     "buildingId": 'VD-001',
     "value_voltage_v":224,
     "value_curent_a":0.3,
-    "value_power_w":40,
+    "value_power_w":null,
     "value_energytotal_wh":63450
 }
 var temperatureData = {
@@ -56,6 +56,7 @@ function dataManipulator() {
     newData.value_voltage_v = Math.floor(newData.value_voltage_v + (newData.value_voltage_v * valueManipulators.voltage));
     newData.value_curent_a = newData.value_curent_a + (newData.value_curent_a * valueManipulators.current);
     newData.value_energytotal_wh = Math.floor(newData.value_energytotal_wh + (newData.value_energytotal_wh * valueManipulators.energy));
+    newData.value_power_w = newData.value_curent_a * newData.value_voltage_v;
     newData.timestamp = new Date().toUTCString();
 
     return newData;
