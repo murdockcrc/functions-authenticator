@@ -7,8 +7,8 @@ var ConnectionString = require('azure-iot-device').ConnectionString;
 var Message = require('azure-iot-device').Message;
 var config = require('../config.js');
 
-var deviceId = 'cbpi-785b1db0-474d-11e6-8c6c-01e11fa91e59';
-var deviceKey = 'UFKfUrT+HJMWs28hBku54zsBYlCak9xI8hRCo5v46H4=';
+var deviceId = config.deviceId;
+var deviceKey = config.deviceKey;
 
 var data = {
     "timestamp": new Date().toUTCString(),
@@ -94,8 +94,7 @@ var client = Client.fromConnectionString(connectionString, Protocol);
 
 function main(context, req) {
     var deviceData = dataManipulator();
-    var message = new Message(JSON.stringify(deviceData));
-    message.userId = deviceId;
+    var message = new Message(JSON.stringify(deviceData));    
 
     temperatureData.Temp_Value = temperatureData.Temp_Value + (randomSign() * 0.1 * temperatureData.Temp_Value);
     toiletData.Input = randomSign() == -1 ? false : true;
@@ -105,9 +104,11 @@ function main(context, req) {
         new Message(JSON.stringify(temperatureData)),
         new Message(JSON.stringify(potiData)),
         new Message(JSON.stringify(toiletData))
-    ];
+    ];    
 
-    console.log(batchData);
+    batchData.forEach(function(event) {        
+        event.userId = deviceId;
+    });
 
     client.open(function (error, result) {
         if (error) {
